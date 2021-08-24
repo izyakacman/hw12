@@ -11,9 +11,9 @@ if (UNIX)
 endif()
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (fashio_mnist "main.cpp")
+add_executable (fashio_mnist "main.cpp" "tf_classifier.cpp")
 
-target_link_libraries(fashio_mnist ${CMAKE_THREAD_LIBS_INIT}) 
+target_link_libraries(fashio_mnist ${CMAKE_THREAD_LIBS_INIT} tensorflow) 
 
 if (UNIX)
     target_link_libraries (fashio_mnist Threads::Threads)
