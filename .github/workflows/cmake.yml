@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
    
-    - run: docker run apt install git
+    - run: docker run apt-get install git
     - run: docker run -v $(pwd):/usr/src/app sdukshis/cppml cmake .
     - run: docker run -v $(pwd):/usr/src/app sdukshis/cppml cmake --build .
     - run: docker run --rm -v $(pwd):/usr/src/app sdukshis/cppml cmake --build . --target package
