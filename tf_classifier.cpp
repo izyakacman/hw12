@@ -25,10 +25,6 @@ void TfClassifier::delete_tf_session(TF_Session *tf_session) {
     }
 }
 
-// static void delete_buffer(void* data, size_t) {
-//     delete[] reinterpret_cast<char*>(data);
-// }
-
 static void dummy_deleter(void*, size_t, void*) {
 
 }
@@ -44,7 +40,6 @@ TfClassifier::TfClassifier(const std::string& modelpath,
 
     TF_Buffer* RunOpts = NULL;
     const char *tags = "serve";
-    // int ntags = 1;
 
     session_.reset(TF_LoadSessionFromSavedModel(session_opts_.get(), RunOpts, modelpath.c_str(), &tags, 1, graph_.get(), nullptr, status.get()));
     if (TF_GetCode(status.get()) != TF_OK) {
@@ -52,7 +47,7 @@ TfClassifier::TfClassifier(const std::string& modelpath,
         ss << " Unable to import graph from '" << modelpath << "': " << TF_Message(status.get());
         throw std::invalid_argument{ss.str()};
     }
-    // size_t pos = 0;
+
     input_op_ = TF_GraphOperationByName(graph_.get(), "serving_default_input");
     if (input_op_ == nullptr) {
         throw std::runtime_error{"Input not found"};
@@ -63,7 +58,6 @@ TfClassifier::TfClassifier(const std::string& modelpath,
         throw std::runtime_error{"Output not found"};
     }
 }
-
 
 size_t TfClassifier::num_classes() const {
     return 10;

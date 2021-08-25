@@ -19,5 +19,4 @@ public:
     virtual probas_t predict_proba(const features_t&) const = 0;
 };
 
-
 }

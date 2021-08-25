@@ -7,10 +7,7 @@
 
 #include "classifier.h"
 
-
 namespace mnist {
-
-
 
 class TfClassifier: public Classifier {
 public:
