@@ -21,10 +21,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
    
-    - run: sudo apt-get update && sudo apt-get install libboost-system-dev -y
-    - run: cmake .
-    - run: cmake --build .
-    - run: cmake --build . --target package
+    - run: docker run sdukshis/cppml cmake .
+    - run: docker run sdukshis/cppml cmake --build .
+    - run: docker run --rm sdukshis/cppml cmake --build . --target package
     
     - name: Create Release
       id: create_release
